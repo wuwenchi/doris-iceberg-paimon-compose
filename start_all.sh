@@ -72,7 +72,12 @@ echo "Start docker-compose..."
 docker compose -f docker-compose.yml --env-file docker-compose.env up -d
 
 echo "Start init iceberg and paimon tables..."
-docker exec -it doris-iceberg-paimon-jobmanager sql-client.sh -f /opt/flink/sql/init.sql >> log
-echo "Start init doris env..."
-sleep 5
-docker exec -it doris-iceberg-paimon-doris-2.1 sh -c "mysql -u root -h doris-2.1 -P 9030 < /opt/doris-bin/init_doris.sql" >> log
+docker exec -it doris-iceberg-paimon-jobmanager sql-client.sh -f /opt/flink/sql/init_tables.sql >> log
+
+echo "============================================================================="
+echo "Success to launch doris+iceberg+paimon+flink+spark+minio environments!"
+echo "You can:"
+echo "    'bash start_doris.sh' to login into doris"
+echo "    'bash start_flink_client.sh' to login into flink"
+echo "    'bash start_iceberg_spark_client.sh' to login into spark for iceberg"
+echo "============================================================================="

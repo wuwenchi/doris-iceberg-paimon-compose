@@ -1,1 +1,1 @@
-docker exec -it doris-iceberg-paimon-jobmanager sql-client.sh -i /opt/flink/sql/init.sql
+docker exec -it doris-iceberg-paimon-jobmanager sql-client.sh -i /opt/flink/sql/init_tables.sql

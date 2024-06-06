@@ -1,4 +1,4 @@
-ALTER SYSTEM ADD BACKEND 'doris-2.1:9050';
+ALTER SYSTEM ADD BACKEND '127.0.0.1:9050';
 
 CREATE CATALOG `iceberg` PROPERTIES (
     "type" = "iceberg",
@@ -8,13 +8,14 @@ CREATE CATALOG `iceberg` PROPERTIES (
     "s3.endpoint"="http://minio:9000",
     "s3.access_key"="admin",
     "s3.secret_key"="password",
-    "s3.region" = "us-east-1"
+    "s3.region"="us-east-1"
 );
 
 CREATE CATALOG `paimon` PROPERTIES (
     "type" = "paimon",
-    "warehouse" = "s3://warehouse/paimon",
+    "warehouse" = "s3://warehouse/wh/",
     "s3.endpoint"="http://minio:9000",
     "s3.access_key"="admin",
-    "s3.secret_key"="password"
+    "s3.secret_key"="password",
+    "s3.region"="us-east-1"
 );

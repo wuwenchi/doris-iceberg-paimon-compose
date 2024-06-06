@@ -1,1 +1,1 @@
-docker exec -it doris-iceberg-paimon-doris-2.1 sh -c "mysql -u root -h doris-2.1 -P 9030"
+docker exec -it doris-iceberg-paimon-doris sh -c "mysql -u root -h doris -P 9030"

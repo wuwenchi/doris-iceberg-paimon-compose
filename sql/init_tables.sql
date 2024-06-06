@@ -30,12 +30,12 @@ CREATE CATALOG `paimon` WITH (
     'warehouse' = 's3://warehouse/wh',
     's3.endpoint'='http://minio:9000',
     's3.access-key' = 'admin',
-    's3.secret-key' = 'password'
+    's3.secret-key' = 'password',
+    's3.region' = 'us-east-1'
 );
 
 
 create database if not exists paimon.db_paimon;
-
 
 CREATE TABLE if not exists paimon.db_paimon.tb_paimon (
     id BIGINT,

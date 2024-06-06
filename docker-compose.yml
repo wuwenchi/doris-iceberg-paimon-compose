@@ -112,7 +112,7 @@ services:
       - ./jars/iceberg-aws-bundle-1.5.2.jar:/opt/flink/lib/iceberg-aws-bundle-1.5.2.jar
       - ./jars/paimon-flink-1.18-0.8.0.jar:/opt/flink/lib/paimon-flink-1.18-0.8.0.jar
       - ./jars/paimon-s3-0.8.0.jar:/opt/flink/lib/paimon-s3-0.8.0.jar
-      - ./sql/init.sql:/opt/flink/sql/init.sql
+      - ./sql/init_tables.sql:/opt/flink/sql/init_tables.sql
     networks:
       - demo-iceberg
     deploy:
@@ -142,11 +142,12 @@ services:
     deploy:
       replicas: 2
   
-  doris-2.1:
+  doris:
     image: mysql:8.0.18
-    container_name: doris-iceberg-paimon-doris-2.1
+    container_name: doris-iceberg-paimon-doris
     networks:
       - demo-iceberg
+    hostname: doris
     ports:
       - ${DORIS_QUERY_PORT}:9030
     environment:
