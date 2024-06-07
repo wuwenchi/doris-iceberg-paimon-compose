@@ -13,6 +13,7 @@ CREATE CATALOG `iceberg` PROPERTIES (
 
 CREATE CATALOG `paimon` PROPERTIES (
     "type" = "paimon",
+    "deletion-vectors.enabled" = "true",
     "warehouse" = "s3://warehouse/wh/",
     "s3.endpoint"="http://minio:9000",
     "s3.access_key"="admin",
