@@ -41,5 +41,7 @@ CREATE TABLE if not exists paimon.db_paimon.tb_paimon (
     id BIGINT,
     val string,
     PRIMARY KEY (id) NOT ENFORCED
+) with (
+    'deletion-vectors.enabled' = 'true'
 );
 
