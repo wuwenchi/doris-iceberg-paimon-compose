@@ -18,11 +18,17 @@
 version: "3"
 
 services:
-  iceberg-spark:
+  spark:
     image: tabulario/spark-iceberg
-    container_name: doris-iceberg-paimon-iceberg-spark
+    container_name: doris-iceberg-paimon-spark
     hostname: demo-spark-iceberg
     build: spark/
+    volumes:
+      - ./jars/paimon-spark-3.5-0.8.0.jar:/opt/spark/jars/paimon-spark-3.5-0.8.0.jar
+      - ./jars/paimon-s3-0.8.0.jar:/opt/spark/jars/paimon-s3-0.8.0.jar
+      - ./data/table:/opt/data
+      - ./data/spark-conf:/opt/spark/conf
+      - ./sql/prepare_data.sql:/opt/sql/prepare_data.sql
     depends_on:
       - rest
       - minio
@@ -51,7 +57,6 @@ services:
       - './packages/jdk1.8.0_202:/opt/jdk1.8.0_202'
       - './packages/doris-bin:/opt/doris-bin'
       - './scripts:/opt/scripts'
-    # command: ["sh", "/opt/scripts/start_doris.sh"]
 
   minio:
     image: minio/minio
@@ -113,6 +118,7 @@ services:
       - ./jars/paimon-flink-1.18-0.8.0.jar:/opt/flink/lib/paimon-flink-1.18-0.8.0.jar
       - ./jars/paimon-s3-0.8.0.jar:/opt/flink/lib/paimon-s3-0.8.0.jar
       - ./sql/init_tables.sql:/opt/flink/sql/init_tables.sql
+      - ./data/flink-conf:/opt/flink/conf
     networks:
       - demo-iceberg
     deploy:

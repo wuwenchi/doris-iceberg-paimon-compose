@@ -37,11 +37,17 @@ CREATE CATALOG `paimon` WITH (
 
 create database if not exists paimon.db_paimon;
 
-CREATE TABLE if not exists paimon.db_paimon.tb_paimon (
-    id BIGINT,
-    val string,
-    PRIMARY KEY (id) NOT ENFORCED
-) with (
-    'deletion-vectors.enabled' = 'true'
+CREATE TABLE if not exists paimon.db_paimon.customer (
+  `c_custkey` int,
+  `c_name` varchar(25),
+  `c_address` varchar(40),
+  `c_nationkey` int,
+  `c_phone` char(15),
+  `c_acctbal` decimal(12,2),
+  `c_mktsegment` char(10),
+  `c_comment` varchar(117),
+  PRIMARY KEY (c_custkey, c_nationkey) NOT ENFORCED
+) PARTITIONED BY (c_nationkey) WITH (
+  'deletion-vectors.enabled' = 'true',
+  'bucket'='1'
 );
-

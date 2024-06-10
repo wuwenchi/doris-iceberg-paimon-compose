@@ -1,1 +1,0 @@
-docker exec -it doris-iceberg-paimon-iceberg-spark spark-sql
