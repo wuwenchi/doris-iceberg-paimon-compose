@@ -160,9 +160,6 @@ mysql> select * from customer order by c_custkey desc limit 4;
 Doris can perform partition pruning on Paimon and speed up the query process through native reading. We can check this through `explain verbose`.
 
 ```sql
-mysql> refresh table customer;
-Query OK, 0 rows affected (0.02 sec)
-
 mysql> explain verbose select * from customer where c_nationkey < 3;
 +------------------------------------------------------------------------------------------------------------------------------------------------+
 | Explain String(Nereids Planner)                                                                                                                |
@@ -249,9 +246,12 @@ Job ID: ff838b7b778a94396b332b0d93c8f7ac
 
 ```
 
-Similarly, you can query the updated data in doris.
+After waiting for the task to be completed, we can view the modified data through doris.
 
 ```sql
+mysql> refresh table customer;
+Query OK, 0 rows affected (0.02 sec)
+
 mysql> explain verbose select * from customer where c_nationkey < 3;
 +------------------------------------------------------------------------------------------------------------------------------------------------+
 | Explain String(Nereids Planner)                                                                                                                |
